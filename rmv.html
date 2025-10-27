@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>日常のRMV計算機</title>
+	<link rel="stylesheet" href="rmv.css">
+	<script defer src="rmv.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<h2>RMV (呼吸ガス消費量) 計算機</h2>
+
+	<div class="input-section">
+		<h3>ログデータ入力</h3>
+
+		<div class="input-group">
+			<label for="p_start">開始残圧 (P<sub>start</sub>) (bar)</label>
+			<input type="number" id="p_start" value="200" min="100" step="10">
+		</div>
+
+		<div class="input-group">
+			<label for="p_end">終了残圧 (P<sub>end</sub>) (bar)</label>
+			<input type="number" id="p_end" value="70" min="0" step="10">
+		</div>
+
+		<div class="input-group">
+			<label for="v_tank">タンク容量 (V<sub>tank</sub>) (L)</label>
+			<input type="number" id="v_tank" value="10" min="5" step="1">
+		</div>
+
+		<div class="input-group">
+			<label for="t_dive">潜水時間 (T<sub>dive</sub>) (min)</label>
+			<input type="number" id="t_dive" value="45" min="5" step="1">
+		</div>
+
+		<div class="input-group">
+			<label for="d_avg">平均水深 (D<sub>avg</sub>) (m)</label>
+			<input type="number" id="d_avg" value="12" min="1" step="0.5">
+		</div>
+	</div>
+
+	<h3>計算結果</h3>
+	<div class="result-group">
+		<p>消費圧力: <span id="p_used_result">---</span> bar</p>
+		<p>消費空気量: <span id="v_used_result">---</span> L</p>
+		<p>平均水深の絶対圧 (ATA): <span id="ata_avg_result">---</span></p>
+		<hr>
+		<p>あなたの RMV (呼吸ガス消費量): <span id="rmv_result" class="highlight-rmv">---</span> L/min</p>
+	</div>
+</div>
+</body>
+</html>
