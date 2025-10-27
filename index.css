@@ -1,0 +1,72 @@
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 20px;
+	background-color: #f4f4f9;
+	color: #333;
+}
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 25px;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+	text-align: center;
+	color: #0056b3;
+	border-bottom: 2px solid #0056b3;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+.input-group, .result-group {
+	margin-bottom: 15px;
+}
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+input[type="number"], select {
+	width: calc(100% - 12px);
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+.result-group {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #e9ecef;
+}
+.result-group p {
+	margin: 5px 0;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+#R_Gas_Result {
+	color: #d9534f; /* R-Gas: 赤系 */
+}
+#T_Gas_Result {
+	color: #28a745; /* T-Gas: 緑系 */
+}
+.note {
+	font-size: 0.9em;
+	color: #6c757d;
+	margin-top: 5px;
+}
+.factor-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+	font-size: 0.9em;
+}
+.factor-table th, .factor-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+.factor-table th {
+	background-color: #f2f2f2;
+}
