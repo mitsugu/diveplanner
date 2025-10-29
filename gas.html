@@ -16,15 +16,15 @@
 		<h3>基本データ入力</h3>
 
 		<div class="input-group">
-			<label for="rmv">ワーキング・マキシマム RMV (呼吸ガス消費量) (L/min)</label>
+			<label for="rmv">ワーキング・マキシマム RMV (L/min)</label>
 			<input type="number" id="rmv" value="20" min="5" step="0.1">
 		</div>
 
 		<div class="input-group">
-			<label for="factor">状況別ファクター (<a href="#factor-index">概説</a>)</label>
+			<label for="factor">状況別ファクター</label>
 			<select id="factor">
 				<option value="1.0">1.0 (理想的な条件)</option>
-				<option value="1.2">1.2 (標準的な条件)</option>
+				<option value="1.2" selected>1.2 (標準的な条件)</option>
 				<option value="1.4">1.4 (挑戦的な条件)</option>
 				<option value="1.6">1.6 (極限的な条件)</option>
 				<option value="2.0">2.0 (非常に高い作業負荷)</option>
@@ -43,28 +43,33 @@
 		</div>
 
 		<div class="input-group">
-			<label for="d_max">計画最大水深 (D<sub>max</sub>) (m)</label>
+			<label for="d_max">最大水深 (D<sub>max</sub>) (m)</label>
 			<input type="number" id="d_max" value="30" min="1" step="1">
 		</div>
 
 		<div class="input-group">
 			<label for="rate_ascent">最大浮上速度 (Ascent Rate) (m/min)</label>
 			<input type="number" id="rate_ascent" value="9" min="1" step="1">
-			<div class="note">※ダイブコンピューター等が推奨する最大速度 (例: 9m/min)</div>
+			<div class="note">※ダイブコンピューターが推奨する最大速度 (例: 9m/min)</div>
 		</div>
-
+		
 		<div class="input-group">
 			<label for="time_safety_stop">安全停止時間 (min)</label>
 			<input type="number" id="time_safety_stop" value="3" min="0" step="1">
 			<div class="note">※5mでの安全停止や減圧停止の合計時間</div>
 		</div>
-
+		
+		<div class="input-group">
+			<label for="p_priority_r_gas">優先 R-Gas (上書き値) (bar)</label>
+			<input type="number" id="p_priority_r_gas" value="" min="0" step="5">
+			<div class="note">※50 bar ルールなど、RMV計算よりも優先する値を設定します。空欄の場合、RMVベースの計算が実行されます。</div>
+		</div>
 		<div class="input-group">
 			<label for="buffer">安全バッファ (R-Gasに上乗せ) (bar)</label>
 			<input type="number" id="buffer" value="10" min="0" step="5">
 		</div>
 
-		<h3 id="factor-index">状況別ファクターの目安</h3>
+		<h3>状況別ファクターの目安</h3>
 		<table class="factor-table">
 			<thead>
 				<tr>
@@ -73,13 +78,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr><td><b>1.0 〜 1.2</b></td><td>理想的な条件（穏やかな環境、浅場、リラックスした潜水）</td></tr>
-				<tr><td><b>1.2 〜 1.4</b></td><td>標準的な条件（平均的な水深、弱い流れ、適度な水中活動）</td></tr>
-				<tr><td><b>1.4 〜 1.6</b></td><td>挑戦的な条件（水深 30m 超過、強い流れ、低い水温）</td></tr>
-				<tr><td><b>2.0</b></td><td>非常に高い作業負荷（予測される長時間の探索、視界不良、高い移動速度）</td></tr>
-				<tr><td><b>3.0</b></td><td>緊急事態（**アウト・オブ・エアーのバディへの給気**を計画する場合、高ストレス環境）</td></tr>
+				<tr><td>**1.0 〜 1.2**</td><td>理想的な条件（穏やかな環境、浅場、リラックスした潜水）</td></tr>
+				<tr><td>**1.2 〜 1.4**</td><td>標準的な条件（平均的な水深、弱い流れ、適度な水中活動）</td></tr>
+				<tr><td>**1.4 〜 1.6**</td><td>挑戦的な条件（水深 30m 超過、強い流れ、低い水温）</td></tr>
+				<tr><td>**2.0**</td><td>非常に高い作業負荷（予測される長時間の探索、視界不良、高い移動速度）</td></tr>
+				<tr><td>**3.0**</td><td>緊急事態（**アウト・オブ・エアーのバディへの給気**を計画する場合、高ストレス環境）</td></tr>
 			</tbody>
 		</table>
+
 	</div>
 
 	<h3>計算結果</h3>
