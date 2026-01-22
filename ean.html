@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAN (ナイトロックス) 計算機</title>
+    <link rel="stylesheet" href="ean.css">
+</head>
+<body>
+
+<div class="container">
+	<a href="index.html" style="text-decoration: none; color: #0056b3;">&larr; ツール一覧に戻る</a>
+    <h2>EAN (ナイトロックス) 計算機</h2>
+
+    <div class="input-section">
+        <h3>ガス設定 & 潜水条件</h3>
+
+        <div class="input-group">
+            <label for="fo2">酸素濃度 (FO<sub>2</sub>) (%)</label>
+            <input type="number" id="fo2" value="32" min="21" max="100" step="0.1">
+            <div class="note">※一般的な空気は 21%、EAN32 は 32%</div>
+        </div>
+
+        <div class="input-group">
+            <label for="po2_limit">最大許容酸素分圧 (Max PO<sub>2</sub>) (bar)</label>
+            <select id="po2_limit">
+                <option value="1.4" selected>1.4 (通常潜水)</option>
+                <option value="1.6">1.6 (減圧停止/緊急時)</option>
+                <option value="1.2">1.2 (保守的)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="depth">予定水深 (Depth) (m)</label>
+            <input type="number" id="depth" value="30" min="0" step="1">
+            <div class="note">※現在の水深における PO<sub>2</sub> と EAD を計算します</div>
+        </div>
+    </div>
+
+    <h3>計算結果</h3>
+    <div class="result-group">
+        <p>MOD (最大許容水深): <span id="mod_result" class="highlight-blue">---</span> m</p>
+        <hr>
+        <p>水深 <span id="current_depth_display">30</span>m での値:</p>
+        <p>PO<sub>2</sub> (酸素分圧): <span id="po2_result">---</span> bar</p>
+        <p>EAD (空気換算深度): <span id="ead_result">---</span> m</p>
+        <div id="warning_msg" class="warning hidden">⚠️ 警告: 酸素分圧が危険域です</div>
+    </div>
+</div>
+
+<script src="ean.js"></script>
+</body>
+</html>

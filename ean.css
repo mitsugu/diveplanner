@@ -1,0 +1,84 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+    color: #17a2b8; /* ナイトロックスイメージのシアン/青緑系 */
+    border-bottom: 2px solid #17a2b8;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+h3 {
+    color: #555;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input[type="number"], select {
+    width: calc(100% - 12px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+.note {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 4px;
+}
+.result-group {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e9ecef;
+}
+.result-group p {
+    margin: 8px 0;
+    font-size: 1.1em;
+}
+.result-group hr {
+    border: 0;
+    border-top: 1px dashed #ccc;
+    margin: 15px 0;
+}
+.highlight-blue {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #0056b3;
+}
+.warning {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    text-align: center;
+}
+.hidden {
+    display: none;
+}
+/* PO2値に応じた色変化用クラス */
+.safe { color: #28a745; font-weight: bold; }
+.caution { color: #ffc107; font-weight: bold; } /* 1.4超え */
+.danger { color: #dc3545; font-weight: bold; }  /* 1.6超え */
