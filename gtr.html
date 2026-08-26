@@ -26,7 +26,7 @@
         <div class="input-group">
             <label for="p_fill">初期充填圧 (<math xmlns="http://www.w3.org/1998/MathML"><mi>P</mi><mi>fill</mi></math>, <math xmlns="http://www.w3.org/1998/MathML"><mi>bar</mi></math>)</label>
             <input type="number" id="p_fill" value="200" min="100" step="10" oninput="calculateGTR()">
-            <div class="note">※ タンクの基準となる充填圧力（参考値であり計算には使用されない）。</div>
+            <div class="note">※ 潜水開始時のタンク圧力。消費量の計算に使用します。</div>
         </div>
 
         <div class="input-group">
@@ -38,7 +38,7 @@
             <label for="rmv">RMV (水面分時換気量, <math xmlns="http://www.w3.org/1998/MathML"><mi>L</mi><mo>/</mo><mi>min</mi></math>)</label>
             <input type="number" id="rmv" value="16" min="5" step="0.1" oninput="calculateGTR()">
         </div>
-
+        
         <hr>
         <h3>現在の潜水状況</h3>
 
@@ -71,6 +71,7 @@
         <p style="font-size: 1.3em;">GTR (滞在可能時間): <span id="GTR_Result" style="color: #28a745;">---</span> min</p>
         <div id="GTR_Warning" class="warning hidden">⚠️ 警告: 浮上を開始しなければならない残圧に達しています。</div>
         <hr style="border-top: 1px solid #aaa;">
+        <p>これまでに消費したガス量: <span id="V_used_Result" style="font-weight: bold; color: #0056b3;">---</span> L (<span id="P_used_Result">---</span> bar)</p>
         <p>浮上に必要なガス量: <span id="V_ascent_Result">---</span> L (<span id="P_ascent_Result">---</span> bar)</p>
         <p>現在水深での消費率: <span id="Rate_depth_Result">---</span> L/min</p>
     </div>

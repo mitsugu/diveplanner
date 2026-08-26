@@ -9,6 +9,8 @@ const rAscentInput = document.getElementById('r_ascent');
 const tStopInput = document.getElementById('t_stop');
 
 const gtrResult = document.getElementById('GTR_Result');
+const vUsedResult = document.getElementById('V_used_Result');
+const pUsedResult = document.getElementById('P_used_Result');
 const vAscentResult = document.getElementById('V_ascent_Result');
 const pAscentResult = document.getElementById('P_ascent_Result');
 const rateDepthResult = document.getElementById('Rate_depth_Result');
@@ -17,6 +19,7 @@ const gtrWarning = document.getElementById('GTR_Warning');
 function calculateGTR() {
     // 1. データ取得
     const p_reserve = parseFloat(pReserveInput.value);
+    const p_fill = parseFloat(pFillInput.value);
     const v_tank = parseFloat(vTankInput.value);
     const rmv = parseFloat(rmvInput.value);
     const p_current = parseFloat(pCurrentInput.value);
@@ -25,8 +28,10 @@ function calculateGTR() {
     const t_stop = parseFloat(tStopInput.value);
 
     // バリデーション
-    if ([p_reserve, v_tank, rmv, p_current, d_current, r_ascent, t_stop].some(isNaN) || v_tank <= 0 || rmv <= 0 || r_ascent <= 0) {
+    if ([p_reserve, p_fill, v_tank, rmv, p_current, d_current, r_ascent, t_stop].some(isNaN) || v_tank <= 0 || rmv <= 0 || r_ascent <= 0) {
         gtrResult.textContent = '---';
+        vUsedResult.textContent = '---';
+        pUsedResult.textContent = '---';
         vAscentResult.textContent = '---';
         pAscentResult.textContent = '---';
         rateDepthResult.textContent = '---';
@@ -34,7 +39,11 @@ function calculateGTR() {
         return;
     }
 
-    // 2. 浮上に必要なガス量の計算
+    // 2. これまでに消費したガス量の計算
+    const p_used = Math.max(0, p_fill - p_current); // 念のためマイナス防止
+    const v_used = p_used * v_tank;
+
+    // 3. 浮上に必要なガス量の計算
     // 浮上移動時間 = 現在水深 / 最大浮上速度
     const t_travel = d_current / r_ascent;
     
@@ -55,11 +64,11 @@ function calculateGTR() {
     const v_ascent_total = v_travel + v_stop;
     const p_ascent = v_ascent_total / v_tank;
 
-    // 3. 現在水深での消費率 (L/min) の計算
+    // 4. 現在水深での消費率 (L/min) の計算
     const ata_current = (d_current / 10) + 1;
     const rate_depth = rmv * ata_current;
 
-    // 4. 利用可能なガスと GTR の計算
+    // 5. 利用可能なガスと GTR の計算
     // 利用可能な圧力 = 現在の残圧 - (水面到達時予備圧 + 浮上に必要な圧力)
     const p_usable = p_current - p_reserve - p_ascent;
     
@@ -69,7 +78,10 @@ function calculateGTR() {
     // GTR (min) = 利用可能なガス量 / 現在水深での消費率
     const gtr = v_usable / rate_depth;
 
-    // 5. 結果の表示
+    // 6. 結果の表示
+    vUsedResult.textContent = v_used.toFixed(1);
+    pUsedResult.textContent = p_used.toFixed(1);
+    
     vAscentResult.textContent = v_ascent_total.toFixed(1);
     pAscentResult.textContent = p_ascent.toFixed(1);
     rateDepthResult.textContent = rate_depth.toFixed(1);
