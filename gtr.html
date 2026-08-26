@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTR (Gas Time Remaining) 計算機</title>
+    <link rel="stylesheet" href="gtr.css">
+    <script defer src="gtr.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" style="text-decoration: none; color: #0056b3;">&larr; ツール一覧に戻る</a>
+    <h2>GTR (Gas Time Remaining) 計算機</h2>
+    <p class="description">GTRは、現在の水深から安全に浮上（安全停止を含む）し、水面到達時に設定した予備圧を確保するために、「あと何分現在の水深に留まれるか（いつ浮上を開始しなければならないか）」を算出します。</p>
+
+    <div class="input-section">
+        <h3>基本データ入力</h3>
+
+        <div class="input-group">
+            <label for="p_reserve">水面到達時予備圧 (<math xmlns="http://www.w3.org/1998/MathML"><mi>P</mi><mi>reserve</mi></math>, <math xmlns="http://www.w3.org/1998/MathML"><mi>bar</mi></math>)</label>
+            <input type="number" id="p_reserve" value="50" min="0" step="10" oninput="calculateGTR()">
+            <div class="note">※ 浮上完了時に残しておきたい最低限の圧力。</div>
+        </div>
+
+        <div class="input-group">
+            <label for="p_fill">初期充填圧 (<math xmlns="http://www.w3.org/1998/MathML"><mi>P</mi><mi>fill</mi></math>, <math xmlns="http://www.w3.org/1998/MathML"><mi>bar</mi></math>)</label>
+            <input type="number" id="p_fill" value="200" min="100" step="10" oninput="calculateGTR()">
+            <div class="note">※ タンクの基準となる充填圧力（参考値であり計算には使用されない）。</div>
+        </div>
+
+        <div class="input-group">
+            <label for="v_tank">タンク容量 (<math xmlns="http://www.w3.org/1998/MathML"><mi>V</mi><mi>tank</mi></math>, <math xmlns="http://www.w3.org/1998/MathML"><mi>L</mi></math>)</label>
+            <input type="number" id="v_tank" value="10" min="5" step="1" oninput="calculateGTR()">
+        </div>
+
+        <div class="input-group">
+            <label for="rmv">RMV (水面分時換気量, <math xmlns="http://www.w3.org/1998/MathML"><mi>L</mi><mo>/</mo><mi>min</mi></math>)</label>
+            <input type="number" id="rmv" value="16" min="5" step="0.1" oninput="calculateGTR()">
+        </div>
+
+        <hr>
+        <h3>現在の潜水状況</h3>
+
+        <div class="input-group">
+            <label for="p_current">現在の残圧 (<math xmlns="http://www.w3.org/1998/MathML"><mi>P</mi><mi>current</mi></math>, <math xmlns="http://www.w3.org/1998/MathML"><mi>bar</mi></math>)</label>
+            <input type="number" id="p_current" value="150" min="0" step="10" oninput="calculateGTR()">
+        </div>
+
+        <div class="input-group">
+            <label for="d_current">現在の水深 (<math xmlns="http://www.w3.org/1998/MathML"><mi>D</mi><mi>current</mi></math>, <math xmlns="http://www.w3.org/1998/MathML"><mi>m</mi></math>)</label>
+            <input type="number" id="d_current" value="20" min="0" step="1" oninput="calculateGTR()">
+        </div>
+
+        <div class="input-group">
+            <label for="r_ascent">最大浮上速度 (<math xmlns="http://www.w3.org/1998/MathML"><mi>m</mi><mo>/</mo><mi>min</mi></math>)</label>
+            <input type="number" id="r_ascent" value="9" min="1" step="1" oninput="calculateGTR()">
+        </div>
+
+        <div class="input-group">
+            <label for="t_stop">安全停止時間 (<math xmlns="http://www.w3.org/1998/MathML"><mi>min</mi></math>)</label>
+            <input type="number" id="t_stop" value="3" min="0" step="1" oninput="calculateGTR()">
+            <div class="note">※ 水深5mでの停止を想定して計算します。</div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>計算結果</h3>
+    <div id="Result_Container" class="result-group">
+        <p style="font-size: 1.3em;">GTR (滞在可能時間): <span id="GTR_Result" style="color: #28a745;">---</span> min</p>
+        <div id="GTR_Warning" class="warning hidden">⚠️ 警告: 浮上を開始しなければならない残圧に達しています。</div>
+        <hr style="border-top: 1px solid #aaa;">
+        <p>浮上に必要なガス量: <span id="V_ascent_Result">---</span> L (<span id="P_ascent_Result">---</span> bar)</p>
+        <p>現在水深での消費率: <span id="Rate_depth_Result">---</span> L/min</p>
+    </div>
+</div>
+</body>
+</html>
